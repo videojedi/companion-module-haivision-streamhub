@@ -1,0 +1,25 @@
+{
+	"id": "haivision-streamhub",
+	"name": "Haivision StreamHub",
+	"shortname": "StreamHub",
+	"description": "Control Haivision StreamHub inputs and MojoPro cameras",
+	"version": "1.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/videowalrus/companion-module-haivision-streamhub.git",
+	"bugs": "https://github.com/videowalrus/companion-module-haivision-streamhub/issues",
+	"maintainers": [
+		{
+			"name": "Video Walrus Ltd"
+		}
+	],
+	"legacyIds": [],
+	"runtime": {
+		"type": "node18",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../src/main.js"
+	},
+	"manufacturer": "Haivision",
+	"products": ["StreamHub"],
+	"keywords": ["streamhub", "mojopro", "camera", "live", "haivision", "bonding"]
+}

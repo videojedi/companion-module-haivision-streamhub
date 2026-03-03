@@ -1,0 +1,22 @@
+{
+	"name": "companion-module-haivision-streamhub",
+	"version": "1.0.0",
+	"main": "src/main.js",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/videowalrus/companion-module-haivision-streamhub"
+	},
+	"scripts": {
+		"package": "companion-module-build"
+	},
+	"engines": {
+		"node": "^18.12 || ^22.8"
+	},
+	"dependencies": {
+		"@companion-module/base": "~1.14.1"
+	},
+	"devDependencies": {
+		"@companion-module/tools": "^2.6.1"
+	}
+}
