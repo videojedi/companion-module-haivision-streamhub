@@ -23,6 +23,7 @@ class StreamHubInstance extends InstanceBase {
 			isLive: false,
 			isRecording: false,
 		}
+		this.consecutiveErrors = 0
 	}
 
 	async init(config) {
@@ -186,15 +187,22 @@ class StreamHubInstance extends InstanceBase {
 			}
 
 			this.pollCycle++
+			this.consecutiveErrors = 0
 			this.updateVariables()
 			this.checkFeedbacks('is-live', 'is-recording', 'camera-active', 'input-connected')
 		} catch (err) {
 			if (this.isNetworkError(err)) {
-				this.state.connected = false
-				this.updateStatus(InstanceStatus.Disconnected)
-				this.stopPolling()
-				this.updateVariables()
-				this.checkFeedbacks('is-live', 'is-recording', 'camera-active', 'input-connected')
+				this.consecutiveErrors++
+				if (this.consecutiveErrors >= 3) {
+					this.state.connected = false
+					this.updateStatus(InstanceStatus.Disconnected)
+					this.stopPolling()
+					this.updateVariables()
+					this.checkFeedbacks('is-live', 'is-recording', 'camera-active', 'input-connected')
+					this.log('warn', 'Disconnected after 3 consecutive errors')
+				} else {
+					this.log('debug', `Poll error (${this.consecutiveErrors}/3): ${err.message}`)
+				}
 			} else {
 				this.log('warn', `Poll error: ${err.message}`)
 			}
